@@ -86,3 +86,11 @@ where precio >= 80 and precio <= 300;
 -- Ejercicio 25
 select * from producto 
 where precio between 60 and 200;
+
+-- Ejercicio 26 
+select * from producto 
+where precio > 200 and id_fabricante = 6;
+
+-- Ejercicio 27
+select * from producto 
+where id_fabricante = 1 or id_fabricante = 3 or id_fabricante = 5;
