@@ -36,3 +36,11 @@ FROM (
     GROUP BY raza
 ) AS promedio_por_raza
 WHERE poder_medio > 8000;
+
+UPDATE guerreros_z 
+SET Raza = LOWER(Raza);
+
+UPDATE guerreros_z 
+SET Raza = LOWER(CONCAT(Raza, 'eres un notas'));
+
+SELECT UPPER(Raza) from guerreros_z as R;
