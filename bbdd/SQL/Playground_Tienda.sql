@@ -220,3 +220,83 @@ FROM
   fabricante
 JOIN
   producto ON fabricante.ID = producto.id_fabricante;
+
+-- COMPOSICIÓN EXTERNA
+-- Ejercicio 1
+SELECT distinct * from fabricante 
+left join producto ON producto.id_fabricante = fabricante.id;
+
+-- Ejercicio 2
+SELECT distinct * from fabricante 
+left join producto ON producto.id_fabricante = fabricante.id
+where producto.id is null;  
+
+
+-- SUBCONSULTAS
+-- Ejercicio 1
+select * from producto where id_fabricante=
+(select id from fabricante where nombre = 'Lenovo');
+
+-- Ejercicio 2
+select * from producto where precio =
+(select MAX(precio) from producto where id_fabricante =
+(select id from fabricante where nombre = 'Lenovo'));
+
+-- Ejercicio 3
+select nombre from producto where precio =
+(select MAX(precio) from producto where id_fabricante =
+(select id from fabricante where nombre = 'Lenovo'));
+
+-- Ejercicio 4
+select nombre from producto where precio =
+(select MIN(precio) from producto where id_fabricante =
+(select id from fabricante where nombre = 'Hewlett-Packard'));
+
+-- Ejercicio 5
+select * from producto where precio >=
+(select MAX(precio) from producto where id_fabricante =
+(select id from fabricante where nombre = 'Lenovo'));
+
+-- Ejercicio 6
+select * from producto where id_fabricante =(
+    select id from fabricante where nombre ='Asus'
+)
+AND precio >
+(select AVG(precio) from producto where id_fabricante = 
+(select id from fabricante where nombre ='Asus'));
+
+-- Ejercicio 7
+SELECT *
+FROM producto p1
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM producto p2
+    WHERE p2.precio > p1.precio
+);
+
+-- Ejercicio 8
+SELECT *
+FROM producto p1
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM producto p2
+    WHERE p2.precio < p1.precio
+);
+
+-- Ejercicio 9
+select nombre from fabricante where id = ANY 
+(select id_fabricante from producto);
+
+-- Ejercicio 10
+select nombre from fabricante where id != ALL 
+(select id_fabricante from producto);
+
+-- Ejercicio 11
+select nombre from fabricante where id in
+(select id_fabricante from producto);
+
+-- Ejercicio 12
+select nombre from fabricante where id  not in
+(select id_fabricante from producto);
+
+-- Ejercicio 13
