@@ -350,3 +350,24 @@ WHERE (
     JOIN fabricante  ON producto.id_fabricante = fabricante.id
     WHERE fabricante.nombre = 'Lenovo'
 );
+
+
+
+-- CONSULTAS RESUMEN
+
+-- Ejercicio 1
+select count(*)
+from producto;
+
+-- Ejercicio 2
+select count(*)
+from fabricantes;
+
+-- Ejercicio 3
+select count( distinct id_fabricante) from producto;
+
+-- Ejercicio 4
+select AVG(precio) from producto;
+
+-- Ejercicio 5
+select MIN(precio) from producto
