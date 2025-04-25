@@ -300,3 +300,53 @@ select nombre from fabricante where id  not in
 (select id_fabricante from producto);
 
 -- Ejercicio 13
+SELECT nombre
+FROM fabricante f
+WHERE EXISTS (
+    SELECT 1
+    FROM producto p
+    WHERE p.id_fabricante = f.id
+);
+
+-- Ejercicio 14
+SELECT nombre
+FROM fabricante f
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM producto p
+    WHERE p.id_fabricante = f.id
+);
+
+-- Ejercicio 15
+SELECT producto.nombre AS nombre_producto, 
+       producto.precio, 
+       fabricante.nombre AS nombre_fabricante
+FROM producto
+JOIN fabricante ON producto.id_fabricante = fabricante.id
+WHERE producto.precio = (
+    SELECT MAX(p.precio)
+    FROM producto p
+    WHERE p.id_fabricante = fabricante.id
+);
+
+-- Ejercicio 16 No se
+
+-- Ejercicio 17 
+select nombre from producto where precio=
+(select MAX(precio) from producto where id_fabricante=
+(select id from fabricante where nombre='Lenovo'));
+
+
+-- Ejercicio 18 
+SELECT f.nombre AS nombre_fabricante
+FROM fabricante f
+WHERE (
+    SELECT COUNT(producto.id)
+    FROM producto 
+    WHERE producto.id_fabricante = f.id
+) = (
+    SELECT COUNT(producto.id)
+    FROM producto 
+    JOIN fabricante  ON producto.id_fabricante = fabricante.id
+    WHERE fabricante.nombre = 'Lenovo'
+);
