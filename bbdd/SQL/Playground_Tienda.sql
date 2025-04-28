@@ -370,4 +370,69 @@ select count( distinct id_fabricante) from producto;
 select AVG(precio) from producto;
 
 -- Ejercicio 5
-select MIN(precio) from producto
+select MIN(precio) from producto;
+
+-- Ejercicio 6
+select MAX(precio) from producto;
+
+-- Ejercicio 7
+SELECT nombre, precio
+FROM producto
+ORDER BY precio ASC
+LIMIT 1;
+
+-- Ejercicio 8
+SELECT nombre, precio
+FROM producto
+ORDER BY precio DESC
+LIMIT 1;
+
+-- Ejercicio 9
+select SUM(precio) from producto;
+
+-- Ejercicio 10
+select COUNT(producto.id_fabricante) from producto 
+where id_fabricante = 
+(select id from fabricante where nombre ='Asus');
+
+-- Ejercicio 11
+select AVG(precio) from producto 
+where id_fabricante = 
+(select id from fabricante where nombre ='Asus');
+
+-- Ejercicio 12
+select MIN(precio) from producto 
+where id_fabricante = 
+(select id from fabricante where nombre ='Asus');
+
+-- Ejercicio 13
+select MAX(precio) from producto 
+where id_fabricante = 
+(select id from fabricante where nombre ='Asus');
+
+-- Ejercicio 14
+select SUM(precio) from producto 
+where id_fabricante = 
+(select id from fabricante where nombre ='Asus');
+
+-- Ejercicio 15
+select MAX(precio), MIN(precio), AVG(precio), COUNT(*) from producto 
+where id_fabricante = 
+(select id from fabricante where nombre ='Crucial');
+
+-- Ejercicio 16
+select fabricante.nombre, COUNT(producto.id) as numero_productos
+from fabricante
+LEFT JOIN producto ON fabricante.id = producto.id_fabricante
+GROUP BY nombre
+ORDER BY numero_productos DESC;
+
+-- Ejercicio 17
+select fabricante.nombre, MAX(producto.precio), MIN(producto.precio), AVG(producto.precio)
+from fabricante
+right JOIN producto ON fabricante.id = producto.id_fabricante
+GROUP BY nombre;
+
+-- Ejercicio 18
+
+
